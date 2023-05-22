@@ -17,7 +17,7 @@ outputs:
     value: ${{ steps.run-container.outputs.error }}
   response:
     description: "JSON response from calling the input URL"
-    value: ${{ steps.run-container.outputs.response }}
+    value: ${{ steps.run-container.outputs.json }}
 
 runs:
   using: "composite"
