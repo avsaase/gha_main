@@ -43,7 +43,7 @@ jobs:
         run: echo "${{ steps.run-action.outputs.error }}"
   
   run_without_cache:
-    name: Test success without cache
+    name: Run without cache
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
