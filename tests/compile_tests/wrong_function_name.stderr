@@ -1,11 +1,25 @@
 error: function must be called `main`
- --> tests/compile_tests/wrong_function_name.rs:2:4
+ --> tests/compile_tests/wrong_function_name.rs:4:4
   |
-2 | fn not_main() -> Result<String, Box<dyn std::error::Error>> {
+4 | fn not_main() -> GitHubActionResult {
   |    ^^^^^^^^
 
-error[E0601]: `main` function not found in crate `$CRATE`
- --> tests/compile_tests/wrong_function_name.rs:4:2
+error[E0432]: unresolved import `gha_main::output`
+ --> tests/compile_tests/wrong_function_name.rs:1:26
   |
-4 | }
+1 | use gha_main::{gha_main, output, GitHubActionResult};
+  |                          ^^^^^^ no `output` in the root
+
+warning: unused import: `GitHubActionResult`
+ --> tests/compile_tests/wrong_function_name.rs:1:34
+  |
+1 | use gha_main::{gha_main, output, GitHubActionResult};
+  |                                  ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+error[E0601]: `main` function not found in crate `$CRATE`
+ --> tests/compile_tests/wrong_function_name.rs:7:2
+  |
+7 | }
   |  ^ consider adding a `main` function to `$DIR/tests/compile_tests/wrong_function_name.rs`

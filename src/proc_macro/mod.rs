@@ -4,13 +4,18 @@ use proc_macro_error::{abort, proc_macro_error};
 use quote::{quote, ToTokens};
 use syn::{parse_macro_input, ItemFn, ReturnType, Type};
 
-/// Add this attribute macro on your `main` function and change the return type
-/// to `gha_main::GitHubActionResult`. You can then use the `?` operator for
-/// conveniet error handling in your Action code.
+/// Procedural macro to return results from `main()` back to the action runner
 ///
-/// The macro takes care of writing the result to the file referenced in
-/// `$GITHUB_OUPUT` (if this environment variable is set by the GitHub Action
-/// runner) or to file `github_output`.
+/// Example usage:
+/// ```rust
+/// use gha_main::{gha_main, gha_result, GitHubActionResult};
+///
+/// #[gha_main]
+/// fn main() -> GitHubActionResult {
+///     let parsed = "5".parse::<i32>()?;
+///     gha_result!(parsed)
+/// }
+/// ```
 #[proc_macro_attribute]
 #[proc_macro_error]
 pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
@@ -32,7 +37,6 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
                 Err(error) => {
                     write(output, format!("error={}", error)).unwrap();
                     eprintln!("Action failed with error: {}", error);
-                    std::process::exit(1);
                 },
             }
         }

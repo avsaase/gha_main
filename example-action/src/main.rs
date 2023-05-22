@@ -1,6 +1,6 @@
 use std::env;
-extern crate gha_main;
-use gha_main::{gha_main, gha_result, GitHubActionResult};
+
+use gha_main::{gha_main, gha_output, GitHubActionResult};
 
 #[gha_main]
 fn main() -> GitHubActionResult {
@@ -9,5 +9,5 @@ fn main() -> GitHubActionResult {
 
     let parsed_u32 = input.parse::<u32>()?;
 
-    Ok(gha_result!(parsed_u32))
+    Ok(gha_output!(parsed_u32))
 }

@@ -2,9 +2,12 @@ use std::fmt::Display;
 
 pub use gha_main_proc_macro::gha_main;
 
+/// Return type for `main()`
 pub type GitHubActionResult = anyhow::Result<GitHubOutputs>;
 
 /// A single GitHub Action output
+///
+/// Construct via [gha_result!].
 pub struct GitHubOutput {
     key: String,
     value: String,
@@ -17,6 +20,7 @@ impl Display for GitHubOutput {
 }
 
 impl GitHubOutput {
+    /// Create a new [GitHubOutput].
     pub fn new(key: &str, value: impl Display) -> Self {
         Self {
             key: key.to_string(),
@@ -26,17 +30,14 @@ impl GitHubOutput {
 }
 
 /// Multiple GitHub Action outputs
+///
+/// Construct via [gha_result!].
 pub struct GitHubOutputs {
     outputs: Vec<GitHubOutput>,
 }
 
 impl GitHubOutputs {
-    pub fn single(key: &str, value: impl Display) -> Self {
-        Self {
-            outputs: vec![GitHubOutput::new(key, value)],
-        }
-    }
-
+    /// Create new [GitHubOutputs].
     pub fn multiple(outputs: Vec<GitHubOutput>) -> Self {
         Self { outputs }
     }
@@ -54,7 +55,7 @@ impl Display for GitHubOutputs {
 }
 
 #[macro_export]
-macro_rules! gha_result {
+macro_rules! gha_output {
     ($($value:ident),+) => {
         {
             let mut v = Vec::new();
