@@ -2,10 +2,10 @@ name: rust-gh-action
 description: "Action to demonstrate how to develop GitHub Actions in Rust"
 
 inputs:
-  url:
-    description: "The URL to make a HTTP GET request to"
+  number:
+    description: "Number to parse to a u32"
     required: true
-    default: "https://httpbin.org/get"
+    default: "0"
   cache:
     description: "Whether or not to cache docker layers (default: true)"
     required: true
@@ -13,11 +13,11 @@ inputs:
 
 outputs:
   error:
-    description: "Any error that may occur"
+    description: "The error if parsing failed"
     value: ${{ steps.run-container.outputs.error }}
-  response:
-    description: "JSON response from calling the input URL"
-    value: ${{ steps.run-container.outputs.json }}
+  parsed:
+    description: "Input parsed to u32 if parsing succeeds"
+    value: ${{ steps.run-container.outputs.parsed_u32 }}
 
 runs:
   using: "composite"
@@ -33,5 +33,5 @@ runs:
       shell: bash
     - name: Run container
       id: run-container
-      run: docker run -v $GITHUB_OUTPUT:/github_output rust-gh-action ${{ inputs.url }}
+      run: docker run -v $GITHUB_OUTPUT:/github_output rust-gh-action ${{ inputs.number }}
       shell: bash

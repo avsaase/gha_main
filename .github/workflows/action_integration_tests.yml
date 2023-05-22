@@ -13,12 +13,16 @@ jobs:
         uses: ./example-action/
         id: run-action
         with: 
-          url: "https://httpbin.org/get"
-      - name: Print output
-        run: echo "${{ steps.run-action.outputs.response }}"
+          number: "5"
+      - name: Verify output
+        if: steps.run-action.outputs.parsed == '5' && steps.run-action.outputs.error == ''
+        run: echo "Received expected output"
+      - name: Unexpected output
+        if: steps.run-action.outputs.parsed != '5' || steps.run-action.outputs.error != ''
+        run: echo "Received unexpected output" && exit 1
 
-  test_invalid_url:
-    name: Test error (invalid URL)
+  test_error:
+    name: Test error
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,7 +31,7 @@ jobs:
         uses: ./example-action/
         id: run-action
         with: 
-          url: "blah"
+          number: "five"
         continue-on-error: true
       - name: Verify failure
         if: steps.run-action.outputs.error != ''
@@ -38,7 +42,7 @@ jobs:
       - name: Print output
         run: echo "${{ steps.run-action.outputs.error }}"
   
-  test_without_cache:
+  run_without_cache:
     name: Test success without cache
     runs-on: ubuntu-latest
     steps:
@@ -47,8 +51,6 @@ jobs:
       - name: Run action
         uses: ./example-action/
         id: run-action
-        with: 
-          url: "https://httpbin.org/get"
+        with:
+          number: "1"
           cache: "false"
-      - name: Print output
-        run: echo "${{ steps.run-action.outputs.response }}"
