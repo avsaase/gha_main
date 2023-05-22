@@ -1,0 +1,14 @@
+[package]
+name = "gha_main-proc_macro"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+quote = "1.0.27"
+syn = { version = "2.0.16", features = ["full"] }
+proc-macro2 = "1.0.58"
+proc-macro-error = "1.0.4"
+
+[lib]
+proc-macro = true
+path = "mod.rs"

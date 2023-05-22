@@ -1,0 +1,35 @@
+name: rust-gh-action
+description: "Action to demonstrate how to develop GitHub Actions in Rust"
+
+inputs:
+  url:
+    description: "The URL to make a HTTP GET request to"
+    required: true
+    default: "https://httpbin.org/get"
+  cache:
+    description: "Whether or not to cache docker layers (default: true)"
+    required: true
+    default: "true"
+
+outputs:
+  error:
+    description: "Any error that may occur"
+    value: ${{ steps.run-container.outputs.error }}
+  response:
+    description: "JSON response from calling the input URL"
+    value: ${{ steps.run-container.outputs.response }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache docker layers
+      uses: jpribyl/action-docker-layer-caching@v0.1.1
+      if: ${{ inputs.cache == 'true' }}
+      continue-on-error: true
+    - name: Build docker image
+      run: docker build -t rust-gh-action .
+      shell: bash
+    - name: Run container
+      id: run-container
+      run: docker run -v $GITHUB_OUTPUT:/github_output rust-gh-action ${{ inputs.url }}
+      shell: bash

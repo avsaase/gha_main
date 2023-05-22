@@ -1,0 +1,11 @@
+error: function must be called `main`
+ --> tests/compile_tests/wrong_function_name.rs:2:4
+  |
+2 | fn not_main() -> Result<String, Box<dyn std::error::Error>> {
+  |    ^^^^^^^^
+
+error[E0601]: `main` function not found in crate `$CRATE`
+ --> tests/compile_tests/wrong_function_name.rs:4:2
+  |
+4 | }
+  |  ^ consider adding a `main` function to `$DIR/tests/compile_tests/wrong_function_name.rs`

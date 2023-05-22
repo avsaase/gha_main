@@ -1,0 +1,54 @@
+name: Test consuming this action
+on:
+  push
+
+jobs:
+  test_success:
+    name: Test success
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run action
+        uses: ./example-action/
+        id: run-action
+        with: 
+          url: "https://httpbin.org/get"
+      - name: Print output
+        run: echo "${{ steps.run-action.outputs.response }}"
+
+  test_invalid_url:
+    name: Test error (invalid URL)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run action
+        uses: ./example-action/
+        id: run-action
+        with: 
+          url: "blah"
+        continue-on-error: true
+      - name: Verify failure
+        if: steps.run-action.outputs.error != ''
+        run: echo "Failed as expected"
+      - name: Unexpected success
+        if: steps.run-action.outputs.error == ''
+        run: echo "Succeeded unexpectedly" && exit 1
+      - name: Print output
+        run: echo "${{ steps.run-action.outputs.error }}"
+  
+  test_without_cache:
+    name: Test success without cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run action
+        uses: ./example-action/
+        id: run-action
+        with: 
+          url: "https://httpbin.org/get"
+          cache: "false"
+      - name: Print output
+        run: echo "${{ steps.run-action.outputs.response }}"
