@@ -8,4 +8,4 @@ ureq = { version = "2.6.2", features = [
     "tls",
     "json",
 ], default-features = false }
-gha_main = { path = "./.." }
+gha_main = { git = "https://github.com/avsaase/gha_main.git" }
