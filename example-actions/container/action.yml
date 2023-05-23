@@ -19,6 +19,6 @@ outputs:
 
 runs:
   using: "docker"
-  image: "./example-actions/container/Dockerfile"
+  image: "Dockerfile"
   args:
     - ${{ inputs.number }}

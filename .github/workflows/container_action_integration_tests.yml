@@ -1,4 +1,4 @@
-name: Test Example container action
+name: Test container action
 on:
   push
 
