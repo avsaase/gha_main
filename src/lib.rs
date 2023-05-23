@@ -42,13 +42,13 @@ pub type GitHubActionResult = anyhow::Result<String>;
 ///
 /// Values returned in `gha_output!()` are returned to the runner with the
 /// output name equal to the Rust variable name. For example:
-/// ```no_run
+/// ```ignore
 /// let one = 1;
 /// gha_output!(one) // Action output `one` set to 1
 /// ```
 ///
 /// Multiple values can be returned as well:
-/// ```no_run
+/// ```ignore
 /// let one = 1;
 /// let two = 2;
 /// gha_output!(one, two) // Action output `one` set to 1, `two` set to 2
