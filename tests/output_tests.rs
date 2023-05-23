@@ -12,7 +12,7 @@ fn result_ok() {
         #[gha_main]
         fn main() -> GitHubActionResult {
             let output = "Success!";
-            Ok(gha_output!(output))
+            gha_output!(output)
         }
 
         main();
@@ -30,7 +30,7 @@ fn result_error() {
         fn main() -> GitHubActionResult {
             let input = "one";
             let parsed = input.parse::<u8>()?;
-            Ok(gha_output!(parsed))
+            gha_output!(parsed)
         }
 
         main();

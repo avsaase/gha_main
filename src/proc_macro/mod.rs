@@ -4,7 +4,8 @@ use proc_macro_error::{abort, proc_macro_error};
 use quote::{quote, ToTokens};
 use syn::{parse_macro_input, ItemFn, ReturnType, Type};
 
-/// Procedural macro to return results from `main()` back to the action runner
+/// Add this macro to your `main()` function to return outputs and errors to
+/// the action runner
 ///
 /// Example usage:
 /// ```rust
