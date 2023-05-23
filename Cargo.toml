@@ -15,4 +15,7 @@ uuid = { version = "1.3.3", features = ["v4", "fast-rng"] }
 
 [workspace]
 members = ["src/proc_macro"]
-exclude = ["example-action"] # The sample action needs its own lock file
+exclude = [
+    "example-actions/composite",
+    "example-actions/container",
+] # The example actions needs their own lock files

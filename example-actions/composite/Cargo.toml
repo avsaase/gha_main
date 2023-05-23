@@ -1,0 +1,8 @@
+[package]
+name = "rust-gh-action"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# gha_main = { git = "https://github.com/avsaase/gha_main.git" }
+gha_main = { path = "./../.." } # Use for local development

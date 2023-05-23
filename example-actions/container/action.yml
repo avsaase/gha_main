@@ -1,0 +1,24 @@
+name: rust-gh-action
+description: "Action to demonstrate how to develop GitHub Actions in Rust"
+
+inputs:
+  number:
+    description: "Number to parse to a u32"
+    required: true
+    default: "0"
+  cache:
+    description: "Whether or not to cache docker layers (default: true)"
+    required: true
+    default: "true"
+
+outputs:
+  error:
+    description: "The error if parsing failed"
+  parsed_u32:
+    description: "Input parsed to u32 if parsing succeeds"
+
+runs:
+  using: "docker"
+  image: "./example-actions/container/Dockerfile"
+  args:
+    - ${{ inputs.number }}

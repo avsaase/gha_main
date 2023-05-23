@@ -1,5 +1,4 @@
-/target
-/example-action/target
+**/target
 Cargo.lock
 .DS_Store
 github_output-*

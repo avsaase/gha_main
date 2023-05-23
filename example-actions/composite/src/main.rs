@@ -9,5 +9,5 @@ fn main() -> GitHubActionResult {
 
     let parsed_u32 = input.parse::<u32>()?;
 
-    Ok(gha_output!(parsed_u32))
+    gha_output!(parsed_u32)
 }

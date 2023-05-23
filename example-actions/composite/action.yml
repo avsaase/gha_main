@@ -28,7 +28,7 @@ runs:
       continue-on-error: true
     - name: Build docker image
       run: |
-        cd example-action 
+        cd example-actions/composite
         docker build -t rust-gh-action .
       shell: bash
     - name: Run container

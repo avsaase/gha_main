@@ -54,6 +54,12 @@ impl Display for GitHubOutputs {
     }
 }
 
+impl From<GitHubOutputs> for GitHubActionResult {
+    fn from(value: GitHubOutputs) -> Self {
+        Ok(value)
+    }
+}
+
 #[macro_export]
 macro_rules! gha_output {
     ($($value:ident),+) => {
@@ -62,7 +68,7 @@ macro_rules! gha_output {
             $(
                 v.push(gha_main::GitHubOutput::new(stringify!($value), &$value.to_string()));
             )+
-            gha_main::GitHubOutputs::multiple(v)
+            gha_main::GitHubOutputs::multiple(v).into()
         }
     };
 }
