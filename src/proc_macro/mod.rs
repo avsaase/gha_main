@@ -24,7 +24,6 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
     let ident = &input_fn.sig.ident;
 
     verify_main(ident);
-    // verify_return_type(&input_fn.sig.output);
 
     TokenStream::from(quote! {
         fn main() {
@@ -47,24 +46,5 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
 fn verify_main(ident: &Ident) {
     if ident != "main" {
         abort!(ident, "function must be called `main`");
-    }
-}
-
-fn verify_return_type(return_type: &ReturnType) {
-    let correct_return_type = if let ReturnType::Type(_, ty) = return_type {
-        if let Type::Path(type_path) = *ty.clone() {
-            type_path.into_token_stream().to_string() == "anyhow::Result<gha_main::GitHubOutputs>"
-        } else {
-            false
-        }
-    } else {
-        false
-    };
-
-    if !correct_return_type {
-        abort!(
-            return_type,
-            "Return type must be `gha_main::GitHubActionResult`"
-        );
     }
 }
