@@ -39,6 +39,24 @@ fn result_error() {
     });
 }
 
+#[test]
+fn multiple_outputs() {
+    let output_file = output_file();
+
+    with_var("GITHUB_OUTPUT", Some(&output_file), || {
+        #[gha_main]
+        fn main() -> GitHubActionResult {
+            let one = 1;
+            let two = 2;
+            gha_output!(one, two)
+        }
+
+        main();
+
+        assert_output("one=1,two=2", &output_file);
+    });
+}
+
 fn output_file() -> String {
     let output_file = format!("tests/github_output-{}", Uuid::new_v4().to_string());
     set_var("GITHUB_OUTPUT", &output_file);
