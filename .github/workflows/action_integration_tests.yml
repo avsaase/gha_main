@@ -1,4 +1,4 @@
-name: Test consuming this action
+name: Test Example action
 on:
   push
 
