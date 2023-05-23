@@ -1,8 +1,8 @@
 use proc_macro::TokenStream;
 use proc_macro2::Ident;
 use proc_macro_error::{abort, proc_macro_error};
-use quote::{quote, ToTokens};
-use syn::{parse_macro_input, ItemFn, ReturnType, Type};
+use quote::quote;
+use syn::{parse_macro_input, ItemFn};
 
 /// Add this macro to your `main()` function to return outputs and errors to
 /// the action runner
