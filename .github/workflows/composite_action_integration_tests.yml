@@ -15,10 +15,10 @@ jobs:
         with: 
           number: "5"
       - name: Verify output
-        if: steps.run-action.outputs.parsed == '5' && steps.run-action.outputs.error == ''
+        if: steps.run-action.outputs.parsed_u32 == '5' && steps.run-action.outputs.error == ''
         run: echo "Received expected output"
       - name: Unexpected output
-        if: steps.run-action.outputs.parsed != '5' || steps.run-action.outputs.error != ''
+        if: steps.run-action.outputs.parsed_u32 != '5' || steps.run-action.outputs.error != ''
         run: echo "Received unexpected output" && exit 1
 
   test_error:
@@ -41,16 +41,3 @@ jobs:
         run: echo "Succeeded unexpectedly" && exit 1
       - name: Print output
         run: echo "${{ steps.run-action.outputs.error }}"
-  
-  run_without_cache:
-    name: Run without cache
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Run action
-        uses: ./example-actions/composite
-        id: run-action
-        with:
-          number: "1"
-          cache: "false"

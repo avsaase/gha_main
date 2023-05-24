@@ -1,21 +1,17 @@
-name: rust-gh-action
-description: "Action to demonstrate how to develop GitHub Actions in Rust"
+name: rust-gh-container-action
+description: "Example of a container based GitHub Action that runs Rust code"
 
 inputs:
   number:
     description: "Number to parse to a u32"
     required: true
     default: "0"
-  cache:
-    description: "Whether or not to cache docker layers (default: true)"
-    required: true
-    default: "true"
 
 outputs:
   error:
     description: "The error if parsing failed"
   parsed_u32:
-    description: "Input parsed to u32 if parsing succeeds"
+    description: "Input parsed to u32 if parsing succeeded"
 
 runs:
   using: "docker"

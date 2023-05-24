@@ -1,22 +1,18 @@
-name: rust-gh-action
-description: "Action to demonstrate how to develop GitHub Actions in Rust"
+name: rust-gh-composite-action
+description: "Example of a composite GitHub Action that builds and runs a docker container with Rust code"
 
 inputs:
   number:
     description: "Number to parse to a u32"
     required: true
     default: "0"
-  cache:
-    description: "Whether or not to cache docker layers (default: true)"
-    required: true
-    default: "true"
 
 outputs:
   error:
     description: "The error if parsing failed"
     value: ${{ steps.run-container.outputs.error }}
-  parsed:
-    description: "Input parsed to u32 if parsing succeeds"
+  parsed_u32:
+    description: "Input parsed to u32 if parsing succeeded"
     value: ${{ steps.run-container.outputs.parsed_u32 }}
 
 runs:
@@ -24,7 +20,6 @@ runs:
   steps:
     - name: Cache docker layers
       uses: jpribyl/action-docker-layer-caching@v0.1.1
-      if: ${{ inputs.cache == 'true' }}
       continue-on-error: true
     - name: Build docker image
       run: |

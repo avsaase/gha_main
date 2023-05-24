@@ -41,16 +41,3 @@ jobs:
         run: echo "Succeeded unexpectedly" && exit 1
       - name: Print output
         run: echo "${{ steps.run-action.outputs.error }}"
-  
-  run_without_cache:
-    name: Run without cache
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Run action
-        uses: ./example-actions/container
-        id: run-action
-        with:
-          number: "1"
-          cache: "false"
