@@ -2,7 +2,7 @@
 
 ## Write GitHub Actions in Rust!
 
-This crate provides a two convenience macros to make it easier to write
+This crate provides two convenience macros to make it easier to write
 GitHub Actions in Rust.
 
 How to use:
