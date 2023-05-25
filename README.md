@@ -54,4 +54,4 @@ up to a couple of minutes.
 
 The best approach strongly depends on the compile time of your crate.
 
-License: MIT
+License: Apache-2.0 OR MIT

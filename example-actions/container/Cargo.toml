@@ -2,6 +2,7 @@
 name = "rust-gh-action"
 version = "0.1.0"
 edition = "2021"
+publish = false
 
 [dependencies]
 gha_main = { git = "https://github.com/avsaase/gha_main.git" }
