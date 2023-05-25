@@ -1,7 +1,7 @@
 //! # Write GitHub Actions in Rust!
 //!
-//! This crate provides a few convenience macros and types to make it easier to
-//! write GitHub Actions in Rust.
+//! This crate provides a two convenience macros to make it easier to write
+//! GitHub Actions in Rust.
 //!
 //! How to use:
 //! 1. Annotate your `main()` function with `#[gha_main]`.
