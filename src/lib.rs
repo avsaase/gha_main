@@ -33,6 +33,24 @@
 //! Errors propagated via the `?` operator are returned to the runner as the
 //! `error` output. The error values are formatted using [anyhow::Error]'s
 //! `Display` implementation.
+//!
+//! # Example actions
+//! The [/example-actions](https://github.com/avsaase/gha_main/tree/master/example-actions)
+//! folder contains two actions that demonstrate how to use this crate in a
+//! GitHub Action:
+//! 1. [/example-actions/container](https://github.com/avsaase/gha_main/tree/master/example-actions/container)
+//! is a docker Action. GitHub currently does not apply docker layer caching
+//! when running a container based action so without publishing your image to
+//! a registry your code will be recompiled on every workflow run. If your
+//! crate has a lot of dependenies you probably want to use the second example.
+//! 2. [/example-actions/composite](https://github.com/avsaase/gha_main/tree/master/example-actions/composite)
+//! is a composite action that manually runs the docker commands. This allows
+//! using another action to utilize docker layer caching. Fetching layers from
+//! the GitHub Action cache can take ~30 seconds and updating the cache at the
+//! end of the run when the layers have changed (or no cache exists) can take
+//! up to a couple of minutes.
+//!
+//! The best approach strongly depends on the compile time of your crate.
 
 pub use gha_main_proc_macro::gha_main;
 

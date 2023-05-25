@@ -37,7 +37,6 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
                 Err(error) => {
                     write(output, format!("error={}", error)).unwrap();
                     eprintln!("Action failed with error: {}", error);
-                    std::process::exit(1);
                 },
             }
         }

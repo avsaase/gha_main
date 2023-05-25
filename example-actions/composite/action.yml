@@ -24,10 +24,10 @@ runs:
     - name: Build docker image
       run: |
         cd example-actions/composite
-        docker build -t rust-gh-action .
+        docker build -t rust-gh-composite-action .
       shell: bash
     - name: Run container
       id: run-container
       # $GITHUB_OUTPUT needs to be mounted in the container to /github_output for the outputs to be available to the runner
-      run: docker run -v $GITHUB_OUTPUT:/github_output rust-gh-action ${{ inputs.number }}
+      run: docker run -v $GITHUB_OUTPUT:/github_output rust-gh-composite-action ${{ inputs.number }}
       shell: bash

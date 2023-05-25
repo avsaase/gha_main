@@ -4,22 +4,13 @@ FROM rust:1.69 as build
 RUN USER=root cargo new --bin rust-gh-action
 WORKDIR /rust-gh-action
 
-# Use sparse registry protocol
-ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
-
-# copy over your manifests
+# copy your source tree
 COPY ./Cargo.lock ./Cargo.lock
 COPY ./Cargo.toml ./Cargo.toml
-
-# this build step will cache your dependencies
-RUN cargo build --release
-RUN rm src/*.rs
-
-# copy your source tree
 COPY ./src ./src
 
-# build for release
-RUN rm ./target/release/deps/rust_gh_action*
+# build for release (use sparse registry protocol)
+ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 RUN cargo build --release
 
 # our final base
