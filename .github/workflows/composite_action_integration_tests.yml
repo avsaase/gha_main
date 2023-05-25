@@ -32,7 +32,7 @@ jobs:
         id: run-action
         with: 
           number: "five"
-        continue-on-error: true
+        continue-on-error: false
       - name: Verify failure
         if: steps.run-action.outputs.error != ''
         run: echo "Failed as expected"
