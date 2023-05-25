@@ -1,6 +1,6 @@
 [package]
 name = "gha_main"
-version = "0.0.0"
+version = "0.0.1"
 description = "Convenience macros for writing GitHub Actions in Rust"
 authors = ["Alexander van Saase <avsaase@gmail.com>"]
 repository = "https://github.com/avsaase/gha_main"
@@ -9,7 +9,7 @@ license = "Apache-2.0 OR MIT"
 
 [dependencies]
 anyhow = "1.0.71"
-gha_main-proc_macro = { path = "src/proc_macro", version = "0.0.0" }
+gha_main-proc_macro = { path = "src/proc_macro", version = "0.0.1" }
 
 [dev-dependencies]
 temp-env = "0.3.4"
