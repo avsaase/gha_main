@@ -27,31 +27,36 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
     verify_main(ident);
 
     TokenStream::from(quote! {
-        use std::sync::Mutex;
         use std::fs::File;
+        use std::fs::OpenOptions;
         use std::io::Write;
+        use std::sync::Mutex;
 
+        use gha_main::anyhow::bail;
         use gha_main::uuid::Uuid;
         use gha_main::lazy_static::lazy_static;
 
         lazy_static! {
             static ref OUTPUT: String =
                 std::env::var("GITHUB_OUTPUT").unwrap_or("github_output".to_string());
-            static ref OUTPUT_FILE: Mutex<File> = Mutex::new(std::fs::OpenOptions::new()
+            static ref OUTPUT_FILE: Mutex<File> = Mutex::new(OpenOptions::new()
                 .create(true)
                 .append(true)
                 .open(&*OUTPUT)
                 .expect("Failed to create or open output file"));
         }
 
-        fn main() {
+        fn main() -> gha_main::anyhow::Result<()> {
             #input_fn
 
             // If an error was propagated from the inner function, write it to the output file
             if let Err(error) = #ident() {
-                std::writeln!(OUTPUT_FILE.lock().unwrap(), "error={}", error.to_string()).unwrap();
+                writeln!(OUTPUT_FILE.lock().unwrap(), "error={}", error.to_string()).unwrap();
                 eprintln!("Action failed with error: {}", error);
+                bail!("Action failed");
             }
+
+            Ok(())
         }
     })
 }

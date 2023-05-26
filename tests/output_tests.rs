@@ -16,7 +16,7 @@ fn result_ok() {
             Ok(())
         }
 
-        main();
+        main().ok();
 
         assert_output("output=Success!\n", &output_file);
     });
@@ -35,7 +35,7 @@ fn result_error() {
             Ok(())
         }
 
-        main();
+        main().ok();
 
         assert_output("error=invalid digit found in string\n", &output_file);
     });
@@ -55,7 +55,7 @@ fn multiple_outputs() {
             Ok(())
         }
 
-        main();
+        main().ok();
 
         assert_output("one=1\ntwo=2\n", &output_file);
     });
@@ -73,7 +73,7 @@ fn multiline_output() {
             Ok(())
         }
 
-        main();
+        main().ok();
 
         assert_output(
             "multiline_string<<.*\nThis is a\nmultiline string\n.*\n",

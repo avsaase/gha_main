@@ -54,6 +54,7 @@
 
 pub use gha_main_proc_macro::gha_main;
 
+pub extern crate anyhow;
 pub extern crate lazy_static;
 pub extern crate uuid;
 
@@ -61,7 +62,7 @@ pub extern crate uuid;
 pub type GitHubActionResult = anyhow::Result<()>;
 
 /// Wrap your computed output variables in this macro to return them to the
-/// runner
+/// GitHub Action runner
 ///
 /// Values returned in `gha_output!()` are returned to the runner with the
 /// output name equal to the Rust variable name. For example:
