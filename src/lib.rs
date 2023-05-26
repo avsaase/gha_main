@@ -7,9 +7,9 @@
 //! 1. Annotate your `main()` function with `#[gha_main]`.
 //! 2. Add return type `GitHubActionResult`.
 //! 3. Use the `?` operator to propagate errors.
-//! 3. Return outputs (anything that implements `Display`) wrapped in
-//! `gha_output!()` to return it the action runner so that it can be used in
-//! later workflow steps or other actions.
+//! 3. Wrap outputs (anything that implements `Display`) in `gha_output!()` to
+//! return it the action runner so that they can be used in later workflow
+//! steps or other actions.
 //!
 //! Example usage:
 //! ```no_run
