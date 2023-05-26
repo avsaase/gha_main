@@ -11,7 +11,7 @@ license = "Apache-2.0 OR MIT"
 anyhow = "1.0.71"
 gha_main-proc_macro = { path = "src/proc_macro", version = "0.0.2" }
 lazy_static = "1.4.0"
-uuid = { version = "1.3.3", features = ["v4", "fast-rng"] }
+uuid = { version = "1.3.3", features = ["v4"] }
 
 [dev-dependencies]
 regex = "1.8.3"
