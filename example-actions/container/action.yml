@@ -12,6 +12,8 @@ outputs:
     description: "The error if parsing failed"
   parsed_u32:
     description: "Input parsed to u32 if parsing succeeded"
+  multiline_string:
+    description: A multiline mutiline_string
 
 runs:
   using: "docker"

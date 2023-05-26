@@ -14,7 +14,8 @@ use syn::{parse_macro_input, ItemFn};
 /// #[gha_main]
 /// fn main() -> GitHubActionResult {
 ///     let parsed = "5".parse::<i32>()?;
-///     gha_result!(parsed)
+///     gha_result!(parsed);
+///     Ok(())
 /// }
 /// ```
 #[proc_macro_attribute]
@@ -26,18 +27,30 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
     verify_main(ident);
 
     TokenStream::from(quote! {
+        use std::sync::Mutex;
+        use std::fs::File;
+        use std::io::Write;
+
+        use gha_main::uuid::Uuid;
+        use gha_main::lazy_static::lazy_static;
+
+        lazy_static! {
+            static ref OUTPUT: String =
+                std::env::var("GITHUB_OUTPUT").unwrap_or("github_output".to_string());
+            static ref OUTPUT_FILE: Mutex<File> = Mutex::new(std::fs::OpenOptions::new()
+                .create(true)
+                .append(true)
+                .open(&*OUTPUT)
+                .expect("Failed to create or open output file"));
+        }
+
         fn main() {
             #input_fn
 
-            let output = std::env::var("GITHUB_OUTPUT").unwrap_or("github_output".to_string());
-
-            use std::fs::write;
-            match #ident() {
-                Ok(value) => write(output, value.to_string()).unwrap(),
-                Err(error) => {
-                    write(output, format!("error={}", error)).unwrap();
-                    eprintln!("Action failed with error: {}", error);
-                },
+            // If an error was propagated from the inner function, write it to the output file
+            if let Err(error) = #ident() {
+                std::writeln!(OUTPUT_FILE.lock().unwrap(), "error={}", error.to_string()).unwrap();
+                eprintln!("Action failed with error: {}", error);
             }
         }
     })

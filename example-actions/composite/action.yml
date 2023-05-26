@@ -14,6 +14,9 @@ outputs:
   parsed_u32:
     description: "Input parsed to u32 if parsing succeeded"
     value: ${{ steps.run-container.outputs.parsed_u32 }}
+  multiline_string:
+    description: A multiline string
+    value: ${{ steps.run-container.outputs.multiline_string }}
 
 runs:
   using: "composite"

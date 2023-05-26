@@ -12,6 +12,7 @@ quote = "1.0.27"
 syn = { version = "2.0.16", features = ["full"] }
 proc-macro2 = "1.0.58"
 proc-macro-error = "1.0.4"
+lazy_static = "1.4.0"
 
 [lib]
 proc-macro = true

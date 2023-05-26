@@ -12,12 +12,13 @@ fn result_ok() {
         #[gha_main]
         fn main() -> GitHubActionResult {
             let output = "Success!";
-            gha_output!(output)
+            gha_output!(output);
+            Ok(())
         }
 
         main();
 
-        assert_output("output=Success!", &output_file);
+        assert_output("output=Success!\n", &output_file);
     });
 }
 
@@ -30,12 +31,13 @@ fn result_error() {
         fn main() -> GitHubActionResult {
             let input = "one";
             let parsed = input.parse::<u8>()?;
-            gha_output!(parsed)
+            gha_output!(parsed);
+            Ok(())
         }
 
         main();
 
-        assert_output("error=invalid digit found in string", &output_file);
+        assert_output("error=invalid digit found in string\n", &output_file);
     });
 }
 
@@ -48,12 +50,35 @@ fn multiple_outputs() {
         fn main() -> GitHubActionResult {
             let one = 1;
             let two = 2;
-            gha_output!(one, two)
+            gha_output!(one);
+            gha_output!(two);
+            Ok(())
         }
 
         main();
 
-        assert_output("one=1,two=2", &output_file);
+        assert_output("one=1\ntwo=2\n", &output_file);
+    });
+}
+
+#[test]
+fn multiline_output() {
+    let output_file = output_file();
+
+    with_var("GITHUB_OUTPUT", Some(&output_file), || {
+        #[gha_main]
+        fn main() -> GitHubActionResult {
+            let multiline_string = "This is a\nmultiline string";
+            gha_output!(multiline_string);
+            Ok(())
+        }
+
+        main();
+
+        assert_output(
+            "multiline_string<<.*\nThis is a\nmultiline string\n.*\n",
+            &output_file,
+        );
     });
 }
 
@@ -63,8 +88,9 @@ fn output_file() -> String {
     output_file
 }
 
-fn assert_output(value: &str, output_file: &str) {
+fn assert_output(output_regex: &str, output_file: &str) {
+    let regex = regex::Regex::new(output_regex).unwrap();
     let output_file_contents = std::fs::read_to_string(output_file).unwrap();
     remove_file(output_file).expect("Test output file could no be deleted");
-    assert_eq!(output_file_contents, value);
+    assert!(regex.is_match(&output_file_contents));
 }

@@ -8,6 +8,10 @@ fn main() -> GitHubActionResult {
     let input = &args[1];
 
     let parsed_u32 = input.parse::<u32>()?;
+    let multiline_string = "This is a\nmultiline text";
 
-    gha_output!(parsed_u32)
+    gha_output!(parsed_u32);
+    gha_output!(multiline_string);
+
+    Ok(())
 }

@@ -14,11 +14,13 @@ jobs:
         id: run-action
         with: 
           number: "5"
+      - name: Print multiline string
+        run: echo "${{ steps.run-action.outputs.multiline_string }}"
       - name: Verify output
-        if: steps.run-action.outputs.parsed_u32 == '5' && steps.run-action.outputs.error == ''
+        if: steps.run-action.outputs.parsed_u32 == '5' && steps.run-action.outputs.error == '' && steps.run-action.outputs.multiline_string != ''
         run: echo "Received expected output"
       - name: Unexpected output
-        if: steps.run-action.outputs.parsed_u32 != '5' || steps.run-action.outputs.error != ''
+        if: steps.run-action.outputs.parsed_u32 != '5' || steps.run-action.outputs.error != '' || steps.run-action.outputs.multiline_string == ''
         run: echo "Received unexpected output" && exit 1
 
   test_error:
