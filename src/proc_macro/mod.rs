@@ -32,7 +32,7 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
         use std::io::Write;
         use std::sync::Mutex;
 
-        use gha_main::anyhow::bail;
+        use gha_main::anyhow::{bail, Result};
         use gha_main::uuid::Uuid;
         use gha_main::lazy_static::lazy_static;
 
@@ -46,7 +46,7 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
                 .expect("Failed to create or open output file"));
         }
 
-        fn main() -> gha_main::anyhow::Result<()> {
+        fn main() -> Result<()> {
             #input_fn
 
             // If an error was propagated from the inner function, write it to the output file
