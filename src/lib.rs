@@ -7,9 +7,9 @@
 //! 1. Annotate your `main()` function with `#[gha_main]`.
 //! 2. Add return type `GitHubActionResult`.
 //! 3. Use the `?` operator to propagate errors.
-//! 3. Wrap outputs (anything that implements `Display`) in `gha_output!()` to
-//! return it the action runner so that they can be used in later workflow
-//! steps or other actions.
+//! 4. Return ouputs (anything that implements `Display`) to the action runner
+//! with the `gha_output!()` macro so they can be used in later workflow steps
+//! or other actions.
 //!
 //! Example usage:
 //! ```no_run
@@ -26,7 +26,7 @@
 //! }
 //! ```
 //!
-//! Values returned in `gha_output!()` are returned to the runner with the
+//! Values wrapped in `gha_output!()` are returned to the runner with the
 //! output name equal to the Rust variable name. In the example above,
 //! if the action is called with input `"5"`, the `parsed_u32` output
 //! will be set to `5`.
@@ -60,8 +60,8 @@ pub extern crate uuid;
 /// Return type for `main()`
 pub type GitHubActionResult = anyhow::Result<()>;
 
-/// Wrap your computed output variables wrapped in this macro to return them to
-/// the runner
+/// Wrap your computed output variables in this macro to return them to the
+/// runner
 ///
 /// Values returned in `gha_output!()` are returned to the runner with the
 /// output name equal to the Rust variable name. For example:
