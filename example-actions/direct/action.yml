@@ -50,5 +50,5 @@ runs:
 
     - name: Run code
       id: run
-      run: example-actions/direct/target/release/rust-gh-action  ${{ inputs.number }}
+      run: example-actions/direct/target/release/rust-gh-action ${{ inputs.number }}
       shell: bash
