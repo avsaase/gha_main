@@ -78,20 +78,20 @@ macro_rules! gha_output {
         let name = stringify!($value);
         let value = $value.to_string();
 
-        let is_multiline = value.as_bytes().iter().filter(|&&c| c == b'\n').count() > 0;
-        if is_multiline {
-            let delimiter = Uuid::new_v4();
-            std::writeln!(
-                OUTPUT_FILE.lock().unwrap(),
-                "{}<<{}\n{}\n{}",
-                name,
-                delimiter,
-                value,
-                delimiter,
-            )
-            .unwrap();
-        } else {
-            std::writeln!(OUTPUT_FILE.lock().unwrap(), "{}={}", name, value).unwrap();
-        }
+        // let is_multiline = value.as_bytes().iter().filter(|&&c| c == b'\n').count() > 0;
+        // if is_multiline {
+        let delimiter = Uuid::new_v4();
+        std::writeln!(
+            OUTPUT_FILE.lock().unwrap(),
+            "{}<<{}\n{}\n{}",
+            name,
+            delimiter,
+            value,
+            delimiter,
+        )
+        .unwrap();
+        // } else {
+        //     std::writeln!(OUTPUT_FILE.lock().unwrap(), "{}={}", name, value).unwrap();
+        // }
     };
 }
