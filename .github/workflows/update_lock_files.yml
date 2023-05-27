@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - src/**
+      - Cargo.toml
+      - Cargo.lock
 
 jobs:
   update-lock-files:
