@@ -7,4 +7,4 @@ publish = false
 [dependencies]
 # gha_main = "0.0.1"
 # gha_main = { path = "./../.." } # Use for local development
-gha_main = { git = "https://github.com/avsaase/gha_main.git", branch = "run-direct-action" }
+gha_main = { git = "https://github.com/avsaase/gha_main.git" }
