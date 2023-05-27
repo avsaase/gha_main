@@ -19,7 +19,8 @@ fn result_ok() {
         let res = main();
 
         assert!(res.is_ok());
-        assert_output("output=Success!\n", &output_file);
+        // assert_output("output=Success!\n", &output_file);
+        assert_output("output<<.*\nSuccess!\n.*\n", &output_file);
     });
 }
 
@@ -60,7 +61,7 @@ fn multiple_outputs() {
         let res = main();
 
         assert!(res.is_ok());
-        assert_output("one=1\ntwo=2\n", &output_file);
+        assert_output("one<<.*\n1\n.*\ntwo<<.*\n2\n.*\n", &output_file);
     });
 }
 
