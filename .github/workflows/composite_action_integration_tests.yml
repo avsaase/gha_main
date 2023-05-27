@@ -1,8 +1,6 @@
 name: Test composite action
 on:
-  push:
-    paths:
-      - example-actions/composite/**
+  push
 
 jobs:
   test_success:
