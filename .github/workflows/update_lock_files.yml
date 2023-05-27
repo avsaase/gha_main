@@ -32,5 +32,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update example actions lock files
-          file_pattern: '*.lock'
+          file_pattern: 'Cargo.lock'
 
