@@ -22,21 +22,35 @@ runs:
   using: "composite"
   steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
+
+    - name: Cache executable
+      id: cache-executable
+      uses: actions/cache@v3
+      with:
+        path: |
+          example-actions/direct/target/release/rust-gh-action
+        key: cache-rust-gh-action-${{ hashFiles('example-actions/direct/src/**', 'example-actions/direct/Cargo.toml', 'example-actions/direct/Cargo.lock') }}
 
     - name: Install toolchain
+      if: steps.cache-executable.outputs.cache-hit != 'true'
       uses: actions-rs/toolchain@v1
       with:
         toolchain: stable
         profile: minimal
         override: true
 
-    - name: Cache dependencies
-      uses: Swatinem/rust-cache@v2
+    - name: Build code
+      if: steps.cache-executable.outputs.cache-hit != 'true'
+      run: |
+        cd example-actions/direct
+        CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo build --release
+      shell: bash
+
+    # - name: Cache dependencies
+    #   uses: Swatinem/rust-cache@v2
 
     - name: Run code
       id: run
-      run: |
-        cd example-actions/direct
-        CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo run --release -- ${{ inputs.number }}
+      run: example-actions/direct/target/release/rust-gh-action  ${{ inputs.number }}
       shell: bash

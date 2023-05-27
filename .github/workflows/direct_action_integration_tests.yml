@@ -1,6 +1,5 @@
 name: Test direct action
-on:
-  push
+on: [push, workflow_dispatch ]
 
 jobs:
   test_success:
