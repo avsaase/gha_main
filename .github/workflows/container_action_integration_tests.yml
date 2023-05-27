@@ -1,6 +1,8 @@
 name: Test container action
 on:
-  push
+  push:
+    paths:
+      - example-actions/container/**
 
 jobs:
   test_success:
