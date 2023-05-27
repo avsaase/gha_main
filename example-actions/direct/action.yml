@@ -24,6 +24,7 @@ runs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # This caches the compiled executable so that it doesn't have to be recompiled on every workflow run
     - name: Cache executable
       id: cache-executable
       uses: actions/cache@v3
@@ -46,9 +47,6 @@ runs:
         cd example-actions/direct
         CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo build --release
       shell: bash
-
-    # - name: Cache dependencies
-    #   uses: Swatinem/rust-cache@v2
 
     - name: Run code
       id: run
