@@ -28,7 +28,7 @@ dependencies = [
 [[package]]
 name = "gha_main"
 version = "0.0.2"
-source = "git+https://github.com/avsaase/gha_main.git#e110ef0c95023464b9681259776ccfe11ddd959b"
+source = "git+https://github.com/avsaase/gha_main.git#82bf8e4719e64c4a1c9939dd88045d0fba57bbbb"
 dependencies = [
  "anyhow",
  "gha_main-proc_macro",
@@ -39,7 +39,7 @@ dependencies = [
 [[package]]
 name = "gha_main-proc_macro"
 version = "0.0.2"
-source = "git+https://github.com/avsaase/gha_main.git#e110ef0c95023464b9681259776ccfe11ddd959b"
+source = "git+https://github.com/avsaase/gha_main.git#82bf8e4719e64c4a1c9939dd88045d0fba57bbbb"
 dependencies = [
  "proc-macro-error",
  "proc-macro2",
