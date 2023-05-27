@@ -23,5 +23,5 @@ members = ["src/proc_macro"]
 exclude = [
     "example-actions/composite",
     "example-actions/container",
-    "example-actions/normal",
+    "example-actions/direct",
 ] # The example actions needs their own lock files

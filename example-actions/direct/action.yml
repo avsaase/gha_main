@@ -1,5 +1,5 @@
-name: rust-gh-composite-action
-description: "Example of a composite GitHub Action that builds and runs a docker container with Rust code"
+name: rust-gh-direct-action
+description: "Example of a composite GitHub Action that builds and runs Rust code"
 
 inputs:
   number:
@@ -37,6 +37,6 @@ runs:
     - name: Run code
       id: run
       run: |
-        cd example-actions/normal
+        cd example-actions/direct
         CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo run --release -- ${{ inputs.number }}
       shell: bash

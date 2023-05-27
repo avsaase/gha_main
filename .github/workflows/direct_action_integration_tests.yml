@@ -1,8 +1,8 @@
-name: Test normal action
+name: Test direct action
 on:
   push:
     paths:
-      - example-actions/normal/**
+      - example-actions/direct/**
 
 jobs:
   test_success:
@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run action
-        uses: ./example-actions/normal
+        uses: ./example-actions/direct
         id: run-action
         with: 
           number: "5"
@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Run action
-        uses: ./example-actions/normal
+        uses: ./example-actions/direct
         id: run-action
         with: 
           number: "five"
