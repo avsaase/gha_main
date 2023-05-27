@@ -2,7 +2,7 @@ name: Test normal action
 on:
   push:
     paths:
-      - example-actions/composite/**
+      - example-actions/normal/**
 
 jobs:
   test_success:
