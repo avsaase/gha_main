@@ -21,6 +21,8 @@ jobs:
           override: true
       
       - name: Update lock files
+        env: 
+          CARGO_REGISTRIES_CRATES_IO_PROTOCOL: sparse
         run: |
           cargo update --manifest-path ./example-actions/container/Cargo.toml
           cargo update --manifest-path ./example-actions/composite/Cargo.toml
