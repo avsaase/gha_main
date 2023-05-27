@@ -68,7 +68,7 @@ pub type GitHubActionResult = anyhow::Result<()>;
 /// output name equal to the Rust variable name. For example:
 /// ```ignore
 /// let one = 1;
-/// gha_output!(one); // Action output `one` set to 1
+/// gha_output!(one); // Output `one` set to 1
 /// ```
 ///
 /// Multiple values can be returned by calling the macro multiple times.

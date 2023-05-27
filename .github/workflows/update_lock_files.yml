@@ -6,7 +6,7 @@ on:
 
 jobs:
   update-lock-files:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     permissions: 
       contents: write
     steps:
@@ -22,9 +22,9 @@ jobs:
       
       - name: Update lock files
         run: |
-          cargo update --manifest-path ./example-actions/container
-          cargo update --manifest-path ./example-actions/composite
-          cargo update --manifest-path ./example-actions/normal
+          cargo update --manifest-path ./example-actions/container/Cargo.toml
+          cargo update --manifest-path ./example-actions/composite/Cargo.toml
+          cargo update --manifest-path ./example-actions/normal/Cargo.toml
       
       - name: Commit lock files
         uses: stefanzweifel/git-auto-commit-action@v4
