@@ -1,0 +1,42 @@
+name: rust-gh-composite-action
+description: "Example of a composite GitHub Action that builds and runs a docker container with Rust code"
+
+inputs:
+  number:
+    description: "Number to parse to a u32"
+    required: true
+    default: "0"
+
+outputs:
+  error:
+    description: "The error if parsing failed"
+    value: ${{ steps.run.outputs.error }}
+  parsed_u32:
+    description: "Input parsed to u32 if parsing succeeded"
+    value: ${{ steps.run.outputs.parsed_u32 }}
+  multiline_string:
+    description: A multiline string
+    value: ${{ steps.run.outputs.multiline_string }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        profile: minimal
+        override: true
+
+    - name: Cache dependencies
+      uses: Swatinem/rust-cache@v2
+
+    - name: Run code
+      id: run
+      run: |
+        cd example-actions/normal
+        CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse cargo run --release -- ${{ inputs.number }}
+      shell: bash
