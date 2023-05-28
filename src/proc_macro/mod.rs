@@ -29,7 +29,6 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
     TokenStream::from(quote! {
         use std::fs::File;
         use std::fs::OpenOptions;
-        use std::io::Write;
         use std::sync::Mutex;
 
         use gha_main::anyhow::{bail, Result};
