@@ -85,6 +85,7 @@ macro_rules! gha_output {
     };
 }
 
+/// Internal helper function. Use [gha_output] instead.
 pub fn write_output(key: &str, value: String, output_file: &mut File) {
     let delimiter = uuid::Uuid::new_v4();
     std::writeln!(
