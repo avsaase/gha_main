@@ -68,6 +68,8 @@ fn initialize_lazy_statics() -> Item {
     }
 }
 
+/// Macro to set outputs for the action
+///
 /// Wrap your computed output variables in this macro to return them to the
 /// GitHub Action runner
 ///
