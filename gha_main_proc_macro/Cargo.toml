@@ -12,7 +12,5 @@ proc-macro = true
 
 [dependencies]
 gha_main_core = { path = "../gha_main_core", version = "0.0.3" }
-# quote = "1.0.27"
-# syn = { version = "2.0.16", features = ["full"] }
 proc-macro2 = "1.0.58"
 proc-macro-error = "1.0.4"
