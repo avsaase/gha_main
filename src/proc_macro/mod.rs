@@ -51,7 +51,7 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
 
             // If an error was propagated from the inner function, write it to the output file
             if let Err(error) = #ident() {
-                writeln!(OUTPUT_FILE.lock().unwrap(), "error={}", error.to_string()).unwrap();
+                gha_output!(error);
                 bail!("Action failed with error: {}", error);
             }
 

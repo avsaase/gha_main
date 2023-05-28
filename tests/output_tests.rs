@@ -40,7 +40,10 @@ fn result_error() {
         let res = main();
 
         assert!(res.is_err());
-        assert_output("error=invalid digit found in string\n", &output_file);
+        assert_output(
+            "error<<.*\ninvalid digit found in string\n.*\n",
+            &output_file,
+        );
     });
 }
 

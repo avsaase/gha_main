@@ -52,6 +52,9 @@
 //! changed (or no cache exists) can take up to a couple of minutes. The best
 //! approach therefore strongly depends on the compile time of your crate.
 
+use std::fs::File;
+use std::io::Write;
+
 pub use gha_main_proc_macro::gha_main;
 
 #[doc(hidden)]
@@ -78,18 +81,21 @@ pub type GitHubActionResult = anyhow::Result<()>;
 #[macro_export]
 macro_rules! gha_output {
     ($value:ident) => {
-        let name = stringify!($value);
+        let key = stringify!($value);
         let value = $value.to_string();
-
-        let delimiter = Uuid::new_v4();
-        std::writeln!(
-            OUTPUT_FILE.lock().unwrap(),
-            "{}<<{}\n{}\n{}",
-            name,
-            delimiter,
-            value,
-            delimiter,
-        )
-        .expect("Failed to write output");
+        $crate::write_output(key, value, &mut OUTPUT_FILE.lock().unwrap());
     };
+}
+
+pub fn write_output(key: &str, value: String, output_file: &mut File) {
+    let delimiter = uuid::Uuid::new_v4();
+    std::writeln!(
+        output_file,
+        "{}<<{}\n{}\n{}",
+        key,
+        delimiter,
+        value,
+        delimiter,
+    )
+    .expect("Failed to write output");
 }
