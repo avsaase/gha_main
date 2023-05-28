@@ -61,8 +61,6 @@ pub use gha_main_proc_macro::gha_main;
 pub extern crate anyhow;
 #[doc(hidden)]
 pub extern crate lazy_static;
-#[doc(hidden)]
-pub extern crate uuid;
 
 /// Return type for `main()`
 pub type GitHubActionResult = anyhow::Result<()>;

@@ -33,7 +33,6 @@ pub fn gha_main(_args: TokenStream, item: TokenStream) -> TokenStream {
         use std::sync::Mutex;
 
         use gha_main::anyhow::{bail, Result};
-        use gha_main::uuid::Uuid;
         use gha_main::lazy_static::lazy_static;
 
         lazy_static! {
