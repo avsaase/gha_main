@@ -1,5 +1,5 @@
 [package]
-name = "gha-main"
+name = "gha_main"
 version = "0.0.2"
 description = "Convenience macros for writing GitHub Actions in Rust"
 authors = ["Alexander van Saase <avsaase@gmail.com>"]
@@ -8,8 +8,8 @@ edition = "2021"
 license = "Apache-2.0 OR MIT"
 
 [dependencies]
-gha-main-proc-macro = { path = "gha-main-proc-macro" }
-gha-main-core = { path = "gha-main-core" }
+gha_main_proc_macro = { path = "gha_main_proc_macro" }
+gha_main_core = { path = "gha_main_core" }
 anyhow = "1.0.71"
 lazy_static = "1.4.0"
 
@@ -20,7 +20,7 @@ trybuild = "1.0.80"
 uuid = { version = "1.3.3", features = ["v4"] }
 
 [workspace]
-members = ["gha-main-proc-macro", "gha-main-core"]
+members = ["gha_main_proc_macro", "gha_main_core"]
 exclude = [
     "example-actions/composite",
     "example-actions/container",

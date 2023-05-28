@@ -1,5 +1,5 @@
 [package]
-name = "gha-main-core"
+name = "gha_main_proc_macro"
 version = "0.0.2"
 description = "Convenience macros for writing GitHub Actions in Rust"
 authors = ["Alexander van Saase <avsaase@gmail.com>"]
@@ -7,10 +7,12 @@ repository = "https://github.com/avsaase/gha_main"
 edition = "2021"
 license = "Apache-2.0 OR MIT"
 
+[lib]
+proc-macro = true
+
 [dependencies]
-syn = { version = "2.0.16", features = ["full"] }
-quote = "1.0.9"
-proc-macro2 = "1.0.24"
-proc-macro-error = "1.0"
-uuid = { version = "1.3.3", features = ["v4"] }
-anyhow = "1.0.71"
+gha_main_core = { path = "../gha_main_core" }
+# quote = "1.0.27"
+# syn = { version = "2.0.16", features = ["full"] }
+proc-macro2 = "1.0.58"
+proc-macro-error = "1.0.4"
