@@ -1,6 +1,6 @@
 [package]
 name = "gha_main"
-version = "0.0.3"
+version = "0.0.4"
 description = "Convenience macros for writing GitHub Actions in Rust"
 authors = ["Alexander van Saase <avsaase@gmail.com>"]
 repository = "https://github.com/avsaase/gha_main"
@@ -8,7 +8,7 @@ edition = "2021"
 license = "Apache-2.0 OR MIT"
 
 [dependencies]
-gha_main_proc_macro = { path = "gha_main_proc_macro", version = "0.0.3" }
+gha_main_proc_macro = { path = "gha_main_proc_macro", version = "0.0.4" }
 gha_main_core = { path = "gha_main_core", version = "0.0.3" }
 anyhow = "1.0.71"
 lazy_static = "1.4.0"
