@@ -8,8 +8,8 @@ edition = "2021"
 license = "Apache-2.0 OR MIT"
 
 [dependencies]
-gha_main_proc_macro = { path = "gha_main_proc_macro" }
-gha_main_core = { path = "gha_main_core" }
+gha_main_proc_macro = { path = "gha_main_proc_macro", version = "0.0.3" }
+gha_main_core = { path = "gha_main_core", version = "0.0.3" }
 anyhow = "1.0.71"
 lazy_static = "1.4.0"
 
