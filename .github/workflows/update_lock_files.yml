@@ -5,6 +5,7 @@ on:
       - src/**
       - Cargo.toml
       - Cargo.lock
+  workflow_dispatch:
 
 jobs:
   update-lock-files:
