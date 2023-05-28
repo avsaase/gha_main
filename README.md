@@ -1,4 +1,4 @@
-# gha_main
+# gha-main
 
 ## Write GitHub Actions in Rust!
 
@@ -14,7 +14,7 @@ with the `gha_output!()` macro so they can be used in later workflow steps
 or other actions.
 
 Example usage:
-```rust
+```rust,no_run
 use std::env;
 use gha_main::{gha_main, gha_output, GitHubActionResult};
 

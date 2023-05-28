@@ -26,25 +26,34 @@ dependencies = [
 ]
 
 [[package]]
-name = "gha_main"
+name = "gha-main"
 version = "0.0.2"
-source = "git+https://github.com/avsaase/gha_main.git#163efa0db37b470a747889d7d8f43d475cddc138"
 dependencies = [
  "anyhow",
- "gha_main-proc_macro",
+ "gha-main-core",
+ "gha-main-proc-macro",
  "lazy_static",
- "uuid",
 ]
 
 [[package]]
-name = "gha_main-proc_macro"
+name = "gha-main-core"
 version = "0.0.2"
-source = "git+https://github.com/avsaase/gha_main.git#163efa0db37b470a747889d7d8f43d475cddc138"
 dependencies = [
+ "anyhow",
  "proc-macro-error",
  "proc-macro2",
  "quote",
  "syn 2.0.18",
+ "uuid",
+]
+
+[[package]]
+name = "gha-main-proc-macro"
+version = "0.0.2"
+dependencies = [
+ "gha-main-core",
+ "proc-macro-error",
+ "proc-macro2",
 ]
 
 [[package]]
@@ -105,7 +114,7 @@ dependencies = [
 name = "rust-gh-action"
 version = "0.1.0"
 dependencies = [
- "gha_main",
+ "gha-main",
 ]
 
 [[package]]
